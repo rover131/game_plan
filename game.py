@@ -3,25 +3,25 @@ import pygame
 
 
 class Initial:
-    """Класс для управлением ресурсами и поведением игры"""
-    def __int__(self):
-        """Инициализации игры """
+    def __init__(self):
+        """Инициалируем игру"""
         pygame.init()
-        self.screen = pygame.display.set_mode([400, 300])
+        self.screen = pygame.display.set_mode([800, 400])
         pygame.display.set_caption("rover game")
+        self.color = (230, 230, 230)        #назначаем цвет
+        print('hello')
 
     def run_game(self):
-        """Запуск основного цикла программы"""
-        while True:                               #отслеживание клавиатуры и мышки
-            self.screen = pygame.display.set_mode([400, 300])
+        """Запуск основного цикла игры"""
+        print('qwer')
+        while True:       # отслеживание клавиатуры и мышки
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-
-                    pygame.quit()
-            pygame.display.flip()                  #обновление экрана
+            self.screen.fill(self.color)
+            pygame.display.flip()           #обновление экрана
 
 
 if __name__ == '__main__':
-    ai = Initial()
-    ai.run_game()
+    asd = Initial()
+    asd.run_game()
