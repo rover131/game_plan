@@ -5,7 +5,7 @@ class Settings:
         # Параметры экрана
         self.full_screen = True        # Полноэкранный режим
         self.screen_width = 800
-        self.screen_height = 300
+        self.screen_height = 500
         self.color = (255, 255, 255)
         # Скорость корабля
         self.speed_ship = 1
@@ -13,4 +13,5 @@ class Settings:
         self.bullet_speed = 1           # скорость снаряда
         self.bullet_width = 3
         self.bullet_height = 15
-        self.bullet_color = (60, 60, 60)
+        self.bullet_color = (60, 60, 60)    # цвет снаряда
+        self.bullets_allowed = 1            # ограничение количества снарядов

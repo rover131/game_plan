@@ -26,6 +26,10 @@ class Initial:
             self.ship.update_poz()          # перемещаем корабль
             self.bullets.update()
             self._update_screen()           # обновляем экран
+            self._update_buttles()               # удаление снарядов, вышедших за пределы окна
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <=0:
+                    self.bullets.remove(bullet)
 
     def _check_events(self):
         """Обработка событий клавиш"""
@@ -48,7 +52,6 @@ class Initial:
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
 
-
     def _check_up_events(self, event):
         """Реакция на отпуснаие клавиш"""
         if event.key == pygame.K_RIGHT:  # перемещаем направо выкл
@@ -56,10 +59,16 @@ class Initial:
         elif event.key == pygame.K_LEFT:  # перемещаем налево выкл
             self.ship.moving_left = False
 
+    def _update_buttles(self):
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+
     def _fire_bullet(self):
         """Создание нового снаряда и включение в группу bullets"""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
     def _update_screen(self):
         self.screen.fill(self.settings.color)  # назначаем цвет
