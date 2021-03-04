@@ -2,6 +2,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 class Initial:
@@ -16,12 +17,14 @@ class Initial:
         self.screen = pygame.display.set_mode([self.settings.screen_width, self.settings.screen_height])
         pygame.display.set_caption("rover game")
         self.ship = Ship(self.screen)
+        self.bullets = pygame.sprite.Group()
 
     def run_game(self):
         """Запуск основного цикла игры"""
         while True:
             self._check_events()            # отслеживание клавиатуры и мышки
             self.ship.update_poz()          # перемещаем корабль
+            self.bullets.update()
             self._update_screen()           # обновляем экран
 
     def _check_events(self):
@@ -42,6 +45,9 @@ class Initial:
             self.ship.moving_left = True
         elif event.key == pygame.K_ESCAPE:
             sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
+
 
     def _check_up_events(self, event):
         """Реакция на отпуснаие клавиш"""
@@ -50,9 +56,16 @@ class Initial:
         elif event.key == pygame.K_LEFT:  # перемещаем налево выкл
             self.ship.moving_left = False
 
+    def _fire_bullet(self):
+        """Создание нового снаряда и включение в группу bullets"""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
+
     def _update_screen(self):
         self.screen.fill(self.settings.color)  # назначаем цвет
         self.ship.blitime()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         pygame.display.flip()
 
 
