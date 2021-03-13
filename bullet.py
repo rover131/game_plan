@@ -16,8 +16,11 @@ class Bullet(Sprite):
 
     def update(self):
         """перемещение снаряда"""
-        #if (event in pygame.event.get()).type == pygame.KMOD_SHIFT):
-         #   self.y -= self.settings.bullet_speed + 100
+        """for event in pygame.event.get():
+            if event.type == pygame.KMOD_SHIFT:
+              self.y -= self.settings.bullet_speed + 100
+            else:
+                self.y -= self.settings.bullet_speed"""
         self.y -= self.settings.bullet_speed
         self.rect.y = self.y
 
